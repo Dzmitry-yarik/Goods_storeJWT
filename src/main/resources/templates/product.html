@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Product</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+
+<br><br><br><br><br><br><br>
+<table class="custom-table">
+    <thead>
+    <tr>
+        <th class="table-header">Exbar Body</th>
+        <th class="table-header">Pack Name</th>
+        <th class="table-header">Quantity</th>
+        <th class="table-header">Price</th>
+        <th class="table-header">Bonus Price</th>
+        <th class="table-header">Unit Name</th>
+        <th class="table-header">Pack Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="table-cell" th:text="${product.exbarBody}"></td>
+        <td class="table-cell" th:text="${product.packName}"></td>
+        <td class="table-cell" th:text="${product.quantity}"></td>
+        <td class="table-cell" th:text="${product.totalPrice}"></td>
+        <td class="table-cell" th:text="${product.bonusPrice}"></td>
+        <td class="table-cell" th:text="${product.unitName}"></td>
+        <td class="table-cell" th:text="${product.packType}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

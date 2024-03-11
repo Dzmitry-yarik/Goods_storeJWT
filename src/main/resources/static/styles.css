@@ -1,0 +1,19 @@
+th, td {
+    border: 5px solid #82cdda;
+    text-align: left;
+    padding: 10px;
+}
+
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 20px;
+}
+
+.table-header {
+    background-color: #b7eade;
+    font-weight: bold;
+}
+
+.table-cell {
+    padding: 7px;
+}

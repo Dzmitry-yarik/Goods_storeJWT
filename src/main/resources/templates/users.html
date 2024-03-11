@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+<br><br><br><br><br><br><br>
+<h1>User List</h1>
+<table class="form-style-2">
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, userStat : ${users}">
+        <td><a th:href="@{'/profile/' + ${user.userid}}" class="user-link" th:text="${user.userid}"></a></td>
+        <td th:text="${user.firstname}"></td>
+        <td th:text="${user.lastname}"></td>
+        <td th:text="${user.email}"></td>
+        <td><a th:href="@{'/users/delete/' + ${user.userid}}" class="delete-button">Delete</a></td>
+    </tr>
+    </tbody>
+    <div>
+        <form action= "@{'/logout'}" method="post">
+            <input type="submit" value="Sign Out">
+        </form>
+    </div>
+</table>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Calculate Price</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<br><br><br>
+
+<h1>Calculate Price</h1>
+<form action="#" th:action="@{/calculatePrice}" method="post">
+  <label for="exbarBody">Exbar:</label>
+  <input type="text" id="exbarBody" name="exbarBody" required><br><br>
+
+  <label for="quantity">Quantity:</label>
+  <th:block th:with="step=(${packType} ? '1 min=1' : '0.001 min=0.001')">
+    <input type="number" id="quantity" name="quantity" required th:attr="step=${step}">
+  </th:block><br><br>
+
+  <label for="discountProvided">Discount:</label>
+  <input type="checkbox" id="discountProvided" name="isDiscountProvided" th:checked="${false}">
+  <input type="hidden" th:attr="name='isDiscountProvided', value=${false}"><br><br>
+
+  <button type="submit">Calculate Price</button>
+</form>
+<div th:if="${param.error}">
+  <p style="color: red;">Товар не найден</p>
+</div>
+</body>
+</html>

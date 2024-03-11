@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Collection Sale</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+<br><br><br><br><br><br><br>
+
+<form th:action="@{/collectionSale}" th:object="${saleRequest}" method="post">
+<table>
+    <thead>
+    <tr>
+        <th>ExbarBody</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Discount</th>
+    </tr>
+    </thead>
+    <tr th:each="assortment, assortmentIndex : ${assortmentList}"><br>
+        <input type="hidden" name="exbarBody" th:value="${assortment.exbarBody}">
+        <td th:text="${assortment.exbarBody}"></td><br>
+        <td th:text="${assortment.packName}"></td><br>
+        <td th:text="${assortment.packPrice}"></td><br>
+        <td>
+            <input type="number" th:id="'quantity-' + ${assortmentIndex.index}"
+                   th:name="'quantity[' + ${assortmentIndex.index} + ']'"
+                   th:attr="step=${assortment.packType ? '1' : 'any'}"><br>
+        </td>
+        <td>
+            <input type="checkbox" th:id="'isDiscountProvided-' + ${assortmentIndex.index}"
+                   th:name="'isDiscountProvided[' + ${assortmentIndex.index} + ']'" th:checked="${false}">
+            <input type="hidden" th:attr="name='isDiscountProvided[' + ${assortmentIndex.index} + ']', value=${false}"><br>
+        </td>
+    </tr>
+</table>
+
+    <label for="cashPrice">Cash Price:</label><br>
+    <input type="number" id="cashPrice" name="cashPrice" step="any" oninput="validatePrices()"><br><br>
+    <label for="cardPrice">Card Price:</label><br>
+    <input type="number" id="cardPrice" name="cardPrice" step="any" oninput="validatePrices()"><br><br>
+
+    <script>
+        function validatePrices() {
+            var cashPrice = document.getElementById('cashPrice').value;
+            var cardPrice = document.getElementById('cardPrice').value;
+
+            if (cashPrice.length <= 0 && cardPrice.length <= 0) {
+                alert('Please fill in at least one of the prices!');
+                if (event.target.id === 'cashPrice') {
+                    document.getElementById('cardPrice').value = '';
+                } else {
+                    document.getElementById('cashPrice').value = '';
+                }
+            }
+        }
+    </script>
+
+    <input type="submit" value="Pay">
+</form>
+</body>
+</html>
