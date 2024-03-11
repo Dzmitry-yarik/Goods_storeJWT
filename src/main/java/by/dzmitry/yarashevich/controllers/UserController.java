@@ -34,15 +34,15 @@ public class UserController {
     }
 
     @PostMapping("/users/update/{userId}")
-    public String update(@PathVariable("userId") Long userId, @ModelAttribute User user){
+    public String update(@PathVariable("userId") Integer userId, @ModelAttribute User user){
         UserServiceImpl.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/users/delete/{userid}")
     public String deletePersonById(@PathVariable Integer userid) {
         UserServiceImpl.deleteById(userid);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 }
 
