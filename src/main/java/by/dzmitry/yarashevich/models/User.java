@@ -41,12 +41,9 @@ public class User implements UserDetails{
     @NotBlank
     @Size(min=6, max = 50)
     private String password;
+
     @Enumerated(value = EnumType.STRING)
     private Role role;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Token> tokens;
-
 
     public User(String firstname, String lastname, String username, String password) {
         this.firstname = firstname;
@@ -134,13 +131,5 @@ public class User implements UserDetails{
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public List<Token> getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
     }
 }

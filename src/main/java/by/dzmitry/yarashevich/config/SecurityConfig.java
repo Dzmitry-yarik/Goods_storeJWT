@@ -1,8 +1,6 @@
 package by.dzmitry.yarashevich.config;
 
 
-import by.dzmitry.yarashevich.security.JwtAuthenticationFilter;
-import by.dzmitry.yarashevich.services.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,27 +14,12 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static by.dzmitry.yarashevich.models.Role.ADMIN;
-import static by.dzmitry.yarashevich.models.Role.USER;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    private final UserServiceImpl userDetailsServiceImp;
-
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    private final CustomLogoutHandler logoutHandler;
-
-    public SecurityConfig(UserServiceImpl userDetailsServiceImp,
-                          JwtAuthenticationFilter jwtAuthenticationFilter,
-                          CustomLogoutHandler logoutHandler) {
-        this.userDetailsServiceImp = userDetailsServiceImp;
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.logoutHandler = logoutHandler;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

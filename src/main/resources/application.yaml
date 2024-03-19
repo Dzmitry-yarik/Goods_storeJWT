@@ -1,13 +1,13 @@
-#spring:
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/goods_store2
-#    username: postgres
-#    password: postgres
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/goods_store2
+    url: jdbc:postgresql://localhost:5432/goods_store2
     username: postgres
     password: postgres
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://db:5432/goods_store2
+#    username: postgres
+#    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

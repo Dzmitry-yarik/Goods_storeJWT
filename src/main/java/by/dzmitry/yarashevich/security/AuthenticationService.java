@@ -4,8 +4,8 @@ package by.dzmitry.yarashevich.security;
 import by.dzmitry.yarashevich.dto.AuthenticationResponse;
 import by.dzmitry.yarashevich.models.Role;
 import by.dzmitry.yarashevich.models.User;
-import by.dzmitry.yarashevich.models.Token;
-import by.dzmitry.yarashevich.repositories.TokenRepository;
+//import by.dzmitry.yarashevich.models.Token;
+//import by.dzmitry.yarashevich.repositories.TokenRepository;
 import by.dzmitry.yarashevich.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,19 +21,15 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    private final TokenRepository tokenRepository;
-
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationService(UserRepository repository,
                                  PasswordEncoder passwordEncoder,
                                  JwtService jwtService,
-                                 TokenRepository tokenRepository,
                                  AuthenticationManager authenticationManager) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
-        this.tokenRepository = tokenRepository;
         this.authenticationManager = authenticationManager;
     }
 
@@ -51,7 +47,6 @@ public class AuthenticationService {
         user = repository.save(user);
 
         String jwt = jwtService.generateToken(user);
-        saveUserToken(jwt, user);
         return new AuthenticationResponse(jwt, "User registration was successful");
     }
 
@@ -62,32 +57,9 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-
         User user = repository.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.generateToken(user);
 
-        revokeAllTokenByUser(user);
-        saveUserToken(jwt, user);
-
         return new AuthenticationResponse(jwt, "User login was successful");
-    }
-    private void revokeAllTokenByUser(User user) {
-        List<Token> validTokens = tokenRepository.findAllTokensByUser(user.getUserid());
-        if(validTokens.isEmpty()) {
-            return;
-        }
-
-        validTokens.forEach(t-> {
-            t.setLoggedOut(true);
-        });
-
-        tokenRepository.saveAll(validTokens);
-    }
-    private void saveUserToken(String jwt, User user) {
-        Token token = new Token();
-        token.setToken(jwt);
-        token.setLoggedOut(false);
-        token.setUser(user);
-        tokenRepository.save(token);
     }
 }

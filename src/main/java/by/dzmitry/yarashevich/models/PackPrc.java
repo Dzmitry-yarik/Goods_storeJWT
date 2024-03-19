@@ -21,5 +21,4 @@ public class PackPrc {
     private Long packprcId;
     private BigDecimal packPrice;
     private BigDecimal packBonus;
-
 }
