@@ -4,15 +4,11 @@ package by.dzmitry.yarashevich.security;
 import by.dzmitry.yarashevich.dto.AuthenticationResponse;
 import by.dzmitry.yarashevich.models.Role;
 import by.dzmitry.yarashevich.models.User;
-//import by.dzmitry.yarashevich.models.Token;
-//import by.dzmitry.yarashevich.repositories.TokenRepository;
 import by.dzmitry.yarashevich.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuthenticationService {

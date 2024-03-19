@@ -1,7 +1,6 @@
 package by.dzmitry.yarashevich.security;
 
 import by.dzmitry.yarashevich.models.User;
-//import by.dzmitry.yarashevich.repositories.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
